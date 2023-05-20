@@ -1,63 +1,146 @@
+/* style.css */
+
+/* Global Styles */
 body {
-  margin: 0;
-  padding: 0;
-  font-family: Arial, sans-serif;
-}
-
-header {
-  background-color: #333;
-  color: #fff;
-  padding: 20px;
-}
-
-nav ul {
-  list-style-type: none;
-  margin: 0;
-  padding: 0;
-}
-
-nav ul li {
-  display: inline-block;
-  margin-right: 10px;
-}
-
-nav ul li a {
-  color: #fff;
-  text-decoration: none;
-}
-
-main {
-  padding: 20px;
-}
-
-.container {
-  max-width: 960px;
-  margin: 0 auto;
-}
-
-section {
-  margin-bottom: 40px;
-}
-
-h1, h2, h3 {
-  margin: 0;
-}
-
-button {
-  background-color: #333;
-  color: #fff;
-  padding: 10px 20px;
-  border: none;
-  cursor: pointer;
-}
-
-button:hover {
-  background-color: #555;
-}
-
-footer {
-  background-color: #333;
-  color: #fff;
-  padding: 20px;
-  text-align: center;
-}
+    font-family: Arial, sans-serif;
+    font-size: 16px;
+    line-height: 1.5;
+    background-image: url(https://lh3.googleusercontent.com/on8eAKg3zpDgpPht151NZYLBnwVwZVBICg1nfnjaqAt_X5-zxm2o2LZDQHkBkUK2UGcKmg8GL4T81Tr2yrBDK4oYZBE2w1tmPOCopN1c7KI22FjMGoWAPTY9r18Io7P1PQKnbEwPKcJDCDhYuoLqxWuhY4MMTOAFe6Ecs5p61GhZZpQu3nib9GfOVBblrTs4A1jBVimGQgRFW1jPQqbVknWCGv8o6MAJr7wZVBb_R-s-P_i8mpSNaf_1ch6Esrw-mS8oDwyXAVWalsLEHeZlX8CR2eOE9M-wRimKOiv3ZDD_Nb9LagdGWPH3uu-24CLlhtIY5bPv-NOC7-rmbs6Zv5eGGOPnbEqUlLEKQIRK46ZY_hMnFrFdGdejKAWUC3BR-gDKY0lsy_U230doWk4GKDAijnku4KpJOMP88jyXTuZFgSNXvrni7fFqKuJ8oaWUcyrKsx8-2AloC5prCWClLKI22g0-W1wgJebMyafjVPEAgQ5aZMJ4XvEyLcXBhOEyruiJRovEveIWu384gJ3bBiw5YbngLITgoUCEKXScqxfv4jvMLIr98jYJE8TKEg0nlp1eRoLI7lp6LGMlTWywhVHtmb0_v-3J8WlAKk2WfsUL8pv0dwGMH-lsbIWfPDnazAM-1G6ORz5e9Izq50xv4nt4o817klh6R3KmUtg5MhanS63ZdhGjP49DkjlUADL6ytd6KZydHPAAGfzpSg0c5eFCzAUpOHnhmcZlD-BmEobaeBHdqjr9leYIVYLdOffKJgYZYa1UWcNt8_r0nAcdfe2SO90X-TmWlEtYFjSdWp-YuqkjKdNN_W7NDqjbyyXPN3FtQ4Wh6fFM8qnpENU9PIZy2JdU8nSBJkYgb2bnhy83vqMB6xub5HOoXP-E2OP4pgi5ov3iYHrfvBKXJbEcotZCMfNb1GAxYd7nR-s8I0aJfxJ04cfrQWU40bal2yZ29XTaFXEPNLQ_RE16ePXU4aoVsUaObcN9Qr-fj_z9q2YCpaifJCJ21es6=w387-h839-s-no?authuser=0);
+    background-size: cover;
+  }
+  
+  h1 {
+    color: #000000;
+  }
+  h2, h3 {
+    color: #000000;
+  }
+  header {
+    background-color: #b8f7ed;
+    padding: 20px;
+    display: flex;
+    align-items: center;
+  }
+  
+  .logo {
+    font-size: 24px;
+    margin: 0;
+    color: #FF4500;
+  }
+  
+  nav {
+    margin-left: auto;
+  }
+  
+  nav ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+  }
+  
+  nav ul li {
+    display: inline;
+    margin-right: 10px;
+  }
+  
+  nav ul li a {
+    text-decoration: none;
+    color: #11bd5e;
+  }
+  
+  main {
+    padding: 20px;
+  }
+  
+  section {
+    margin-bottom: 40px;
+  }
+  
+  h2 {
+    margin-top: 0;
+  }
+  
+  form {
+    display: flex;
+    flex-direction: column;
+    max-width: 400px;
+  }
+  
+  label {
+    margin-bottom: 8px;
+  }
+  
+  input, textarea, select {
+    margin-bottom: 16px;
+    padding: 10px;
+    border-radius: 4px;
+    border: 1px solid #ccc;
+  }
+  
+  button {
+    padding: 10px 20px;
+    background-color: #FF4500;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+  
+  button:hover {
+    background-color: #FF6347;
+  }
+  
+  #borrowing-container {
+    display: flex;
+    flex-wrap: wrap;
+  }
+  
+  .borrowing-item {
+    flex: 0 0 33.33%;
+    padding: 10px;
+  }
+  
+  .borrow-button {
+    background-color: #FF4500;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    padding: 5px 10px;
+  }
+  
+  .borrow-button:hover {
+    background-color: #FF6347;
+  }
+  
+  #donation-container {
+    display: flex;
+    flex-wrap: wrap;
+  }
+  
+  .donation-item {
+    flex: 0 0 33.33%;
+    padding: 10px;
+    background-color: #f8f8f8;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+  }
+  
+  footer {
+    background-color: #e35802;
+    padding: 20px;
+    color: #fff;
+    text-align: center;
+  }
+  
+  /* Media Queries */
+  @media screen and (max-width: 768px) {
+    .borrowing-item {
+      flex: 0 0 50%;
+    }
+    
+    .donation-item {
+      flex: 0 0 50%;
+    }
+  }
+  
