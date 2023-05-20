@@ -1,87 +1,55 @@
 <!DOCTYPE html>
-<html lang="en">
-
+<html>
 <head>
-    <link rel="stylesheet" href="style.css">
-
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Community Marketplace</title>
-  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" type="text/css" href="styles.css">
 </head>
-
 <body>
   <header>
     <h1>Community Marketplace</h1>
+    <nav>
+      <ul>
+        <li><a href="#">Home</a></li>
+        <li><a href="#">Listings</a></li>
+        <li><a href="#">My Items</a></li>
+        <li><a href="#">Profile</a></li>
+        <li><a href="#">Logout</a></li>
+      </ul>
+    </nav>
   </header>
 
   <main>
-    <section>
-      <h2>List an Item</h2>
-      <!-- Item listing form -->
-      <form id="itemForm">
-        <!-- Item details fields -->
-        <!-- ... -->
-        <button type="submit">List Item</button>
-      </form>
+    <section id="welcome">
+      <div class="container">
+        <h2>Welcome to the Community Marketplace!</h2>
+        <p>Join our community and start exchanging or donating items you no longer need.</p>
+      </div>
     </section>
 
-    <section>
-      <h2>Request an Item</h2>
-      <!-- Item request form -->
-      <form id="requestForm">
-        <!-- Item request details fields -->
-        <!-- ... -->
-        <button type="submit">Request Item</button>
-      </form>
-    </section>
-
-    <section>
-      <h2>Payment</h2>
-      <!-- Payment form -->
-      <form id="paymentForm">
-        <!-- Payment details fields -->
-        <!-- ... -->
-        <button type="submit">Pay</button>
-      </form>
-    </section>
-
-    <section>
-      <h2>Email Notification</h2>
-      <!-- Email notification form -->
-      <form id="sendEmailForm">
-        <!-- Email details fields -->
-        <!-- ... -->
-        <button type="submit">Send Email</button>
-      </form>
-    </section>
-
-    <section>
-      <h2>User Registration</h2>
-      <!-- User registration form -->
-      <form id="registrationForm">
-        <!-- Registration details fields -->
-        <!-- ... -->
-        <button type="submit">Register</button>
-      </form>
-    </section>
-
-    <section>
-      <h2>User Login</h2>
-      <!-- User login form -->
-      <form id="loginForm">
-        <!-- Login details fields -->
-        <!-- ... -->
-        <button type="submit">Login</button>
-      </form>
+    <section id="listings">
+      <div class="container">
+        <h2>Latest Listings</h2>
+        <div class="listing">
+          <img src="item1.jpg" alt="Item 1">
+          <h3>Item 1</h3>
+          <p>Description of Item 1</p>
+          <button>Contact Seller</button>
+        </div>
+        <div class="listing">
+          <img src="item2.jpg" alt="Item 2">
+          <h3>Item 2</h3>
+          <p>Description of Item 2</p>
+          <button>Contact Seller</button>
+        </div>
+        <!-- Add more listing items here -->
+      </div>
     </section>
   </main>
 
   <footer>
-    <p>&copy; 2023 Community Marketplace. All rights reserved.</p>
+    <div class="container">
+      <p>&copy; 2023 Community Marketplace. All rights reserved.</p>
+    </div>
   </footer>
-
-  <script src="main.js"></script>
 </body>
-
 </html>
