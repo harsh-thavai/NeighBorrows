@@ -1,150 +1,382 @@
-// Stripe Payment Integration
-// Replace with your own Stripe publishable API key
-const stripe = Stripe('YOUR_STRIPE_PUBLISHABLE_KEY');
+// JavaScript code
 
-// Handle payment form submission
-document.getElementById('paymentForm').addEventListener('submit', async function (event) {
-  event.preventDefault();
+function onClickRegistrationForm() {
+  // This function is called when the registration form is clicked.
+  // It will submit the form to the server.
 
-  const formData = new FormData(this);
+  var formData = new FormData(document.getElementById("registration-form"));
 
-  // Create a payment method
-  const paymentMethod = await stripe.createPaymentMethod({
-    type: 'card',
-    card: {
-      number: formData.get('cardNumber'),
-      exp_month: formData.get('expiryMonth'),
-      exp_year: formData.get('expiryYear'),
-      cvc: formData.get('cvc'),
-    },
-  });
+  var xhr = new XMLHttpRequest();
 
-  if (paymentMethod.error) {
-    console.error(paymentMethod.error);
-    // Display error message to the user
-    return;
-  }
+  xhr.open("POST", "/register");
 
-  // Handle the payment using a backend server
-  // Send the paymentMethod.id to your server and complete the payment
-
-  // Example: Fetch API to your backend endpoint
-  fetch('/charge', {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-    },
-    body: JSON.stringify({
-      paymentMethodId: paymentMethod.id,
-      amount: formData.get('amount'),
-      currency: 'usd',
-    }),
-  })
-    .then(response => response.json())
-    .then(data => {
-      console.log(data);
-      // Handle the response from your server
-      // Display success message or handle any errors
-    })
-    .catch(error => {
-      console.error(error);
-      // Handle any network or server error
-    });
-});
-
-// SendGrid Email Integration
-// Replace with your own SendGrid API key
-const SENDGRID_API_KEY = 'YOUR_SENDGRID_API_KEY';
-
-// Handle email sending
-document.getElementById('sendEmailForm').addEventListener('submit', async function (event) {
-  event.preventDefault();
-
-  const formData = new FormData(this);
-
-  // Create the email request body
-  const emailData = {
-    personalizations: [
-      {
-        to: [{ email: formData.get('toEmail') }],
-        subject: formData.get('subject'),
-      },
-    ],
-    from: { email: formData.get('fromEmail') },
-    content: [{ type: 'text/plain', value: formData.get('message') }],
+  xhr.onload = function () {
+    if (xhr.status === 200) {
+      // The registration was successful.
+      alert("You have successfully registered!");
+    } else {
+      // The registration was unsuccessful.
+      alert("There was an error registering. Please try again.");
+    }
   };
 
-  // Send the email using SendGrid API
-  try {
-    const response = await fetch('https://api.sendgrid.com/v3/mail/send', {
-      method: 'POST',
-      headers: {
-        Authorization: `Bearer ${SENDGRID_API_KEY}`,
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(emailData),
-    });
+  xhr.send(formData);
+}
 
-    if (response.ok) {
-      console.log('Email sent successfully');
-      // Display success message to the user
+function onClickBorrowingButton() {
+  // This function is called when the borrowing button is clicked.
+  // It will open the borrowing modal.
+
+  var modal = document.getElementById("borrowing-modal");
+
+  modal.style.display = "block";
+}
+
+function onClickItemListingForm() {
+  // This function is called when the item listing form is clicked.
+  // It will submit the form to the server.
+
+  var formData = new FormData(document.getElementById("item-listing-form"));
+
+  var xhr = new XMLHttpRequest();
+
+  xhr.open("POST", "/list-item");
+
+  xhr.onload = function () {
+    if (xhr.status === 200) {
+      // The item listing was successful.
+      alert("You have successfully listed an item!");
     } else {
-      console.error('Failed to send email');
-      // Display error message to the user
+      // The item listing was unsuccessful.
+      alert("There was an error listing an item. Please try again.");
     }
-  } catch (error) {
-    console.error(error);
-    // Handle any network or API errors
+  };
+
+  xhr.send(formData);
+}
+
+function onClickDonationButton() {
+  // This function is called when the donation button is clicked.
+  // It will open the donation modal.
+
+  var modal = document.getElementById("donation-modal");
+
+  modal.style.display = "block";
+}
+
+function onClickSearchForm() {
+  // This function is called when the search form is clicked.
+  // It will submit the form to the server.
+
+  var formData = new FormData(document.getElementById("search-form"));
+
+  var xhr = new XMLHttpRequest();
+
+  xhr.open("POST", "/search");
+
+  xhr.onload = function () {
+    if (xhr.status === 200) {
+      // The search was successful.
+      var results = JSON.parse(xhr.responseText);
+
+      var searchResults = document.getElementById("search-results");
+
+      searchResults.innerHTML = "";
+
+      for (var i = 0; i < results.length; i++) {
+        var result = results[i];
+
+        var li = document.createElement("li");
+
+        li.textContent = result.name;
+
+        searchResults.appendChild(li);
+      }
+    } else {
+      // The search was unsuccessful.
+      alert("There was an error searching. Please try again.");
+    }
+  };
+
+  xhr.send(formData);
+}
+
+function onClickRequestForm() {
+  // This function is called when the request form is clicked.
+  // It will submit the form to the server.
+
+  var formData = new FormData(document.getElementById("request-form"));
+
+  var xhr = new XMLHttpRequest();
+
+  xhr.open("POST", "/request");
+
+  xhr.onload = function () {
+    if (xhr.status === 200) {
+      // The request was successful.
+      alert("Your request has been submitted!");
+    } else {
+      // The request was unsuccessful.
+      alert("There was an error requesting an item. Please try again.");
+    }
+  };
+
+  xhr.send(formData);
+}
+
+// React.js code
+
+import React, { Component } from "react";
+
+class CommunityMarketplace extends Component {
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      items: [],
+    };
+
+    this.onClickBorrowingButton = this.onClickBorrowingButton.bind(this);
+    this.onClickItemListingForm = this.onClickItemListingForm.bind(this);
+    this.onClickDonationButton = this.onClickDonationButton.bind(this);
+    this.onClickSearchForm = this.onClickSearchForm.bind(this);
+    this.onClickRequestForm = this.onClickRequestForm.bind(this);
   }
-});
 
-// Firebase Authentication Integration
-// Replace with your own Firebase configuration
-const firebaseConfig = {
-  apiKey: 'YOUR_FIREBASE_API_KEY',
-  authDomain: 'your-app.firebaseapp.com',
-  projectId: 'your-app',
-};
+  componentDidMount() {
+    // Get the items from the server.
+    var xhr = new XMLHttpRequest();
 
-// Initialize Firebase
-firebase.initializeApp(firebaseConfig);
+    xhr.open("GET", "/items");
 
-// Handle user registration form submission
-document.getElementById('registrationForm').addEventListener('submit', function (event) {
-  event.preventDefault();
+    xhr.onload = () => {
+      if (xhr.status === 200) {
+        // The items were successfully retrieved.
+        var items = JSON.parse(xhr.responseText);
 
-  const formData = new FormData(this);
-  const email = formData.get('email');
-  const password = formData.get('password');
+        this.setState({
+          items: items,
+        });
+      } else {
+        // The items were not successfully retrieved.
+        alert("There was an error retrieving the items. Please try again.");
+      }
+    };
 
-  // Register the user with Firebase Authentication
-  firebase.auth().createUserWithEmailAndPassword(email, password)
-    .then(userCredential => {
-      console.log('User registered:', userCredential.user);
-      // Display success message or redirect to the logged-in page
-    })
-    .catch(error => {
-      console.error(error);
-      // Display error message to the user
-    });
-});
+    xhr.send();
+  }
 
-// Handle user login form submission
-document.getElementById('loginForm').addEventListener('submit', function (event) {
-  event.preventDefault();
+  onClickBorrowingButton() {
+    // This function is called when the borrowing button is clicked.
+    // It will open the borrowing modal.
 
-  const formData = new FormData(this);
-  const email = formData.get('email');
-  const password = formData.get('password');
+    var modal = document.getElementById("borrowing-modal");
 
-  // Sign in the user with Firebase Authentication
-  firebase.auth().signInWithEmailAndPassword(email, password)
-    .then(userCredential => {
-      console.log('User logged in:', userCredential.user);
-      // Display success message or redirect to the logged-in page
-    })
-    .catch(error => {
-      console.error(error);
-      // Display error message to the user
-    });
-});
+    modal.style.display = "block";
+  }
+
+  onClickItemListingForm(event) {
+    event.preventDefault();
+
+    // This function is called when the item listing form is submitted.
+    // It will submit the form to the server.
+
+    var formData = new FormData(event.target);
+
+    var xhr = new XMLHttpRequest();
+
+    xhr.open("POST", "/list-item");
+
+    xhr.onload = () => {
+      if (xhr.status === 200) {
+        // The item listing was successful.
+        alert("You have successfully listed an item!");
+      } else {
+        // The item listing was unsuccessful.
+        alert("There was an error listing an item. Please try again.");
+      }
+    };
+
+    xhr.send(formData);
+  }
+
+  onClickDonationButton() {
+    // This function is called when the donation button is clicked.
+    // It will open the donation modal.
+
+    var modal = document.getElementById("donation-modal");
+
+    modal.style.display = "block";
+  }
+
+  onClickSearchForm(event) {
+    event.preventDefault();
+
+    // This function is called when the search form is submitted.
+    // It will submit the form to the server.
+
+    var formData = new FormData(event.target);
+
+    var xhr = new XMLHttpRequest();
+
+    xhr.open("POST", "/search");
+
+    xhr.onload = () => {
+      if (xhr.status === 200) {
+        // The search was successful.
+        var results = JSON.parse(xhr.responseText);
+
+        var searchResults = document.getElementById("search-results");
+
+        searchResults.innerHTML = "";
+
+        for (var i = 0; i < results.length; i++) {
+          var result = results[i];
+
+          var li = document.createElement("li");
+
+          li.textContent = result.name;
+
+          searchResults.appendChild(li);
+        }
+      } else {
+        // The search was unsuccessful.
+        alert("There was an error searching. Please try again.");
+      }
+    };
+
+    xhr.send(formData);
+  }
+
+  onClickRequestForm(event) {
+    event.preventDefault();
+
+    // This function is called when the request form is submitted.
+    // It will submit the form to the server.
+
+    var formData = new FormData(event.target);
+
+    var xhr = new XMLHttpRequest();
+
+    xhr.open("POST", "/request");
+
+    xhr.onload = () => {
+      if (xhr.status === 200) {
+        // The request was successful.
+        alert("Your request has been submitted!");
+      } else {
+        // The request was unsuccessful.
+        alert("There was an error requesting an item. Please try again.");
+      }
+    };
+
+    xhr.send(formData);
+  }
+
+  render() {
+    return (
+      <div>
+        <header>
+          <h1>Community Marketplace</h1>
+          <nav>
+            <ul>
+              <li>
+                <a href="#">Home</a>
+              </li>
+              <li>
+                <a href="#" onClick={this.onClickBorrowingButton}>
+                  Borrow
+                </a>
+              </li>
+              <li>
+                <a href="#">List Items</a>
+              </li>
+              <li>
+                <a href="#" onClick={this.onClickDonationButton}>
+                  Donate
+                </a>
+              </li>
+              <li>
+                <a href="#" onClick={this.onClickSearchForm}>
+                  Search
+                </a>
+              </li>
+              <li>
+                <a href="#" onClick={this.onClickRequestForm}>
+                  Request
+                </a>
+              </li>
+            </ul>
+          </nav>
+        </header>
+        <main>
+          <section id="borrowing-section">
+            <h2>Borrowing</h2>
+            <div id="borrowing-container">
+              {this.state.items.map((item) => (
+                <div className="borrowing-item" key={item.id}>
+                  <h3>{item.name}</h3>
+                  <p>{item.description}</p>
+                  <button className="borrow-button" onClick={this.onClickBorrowingButton}>
+                    Borrow
+                  </button>
+                </div>
+              ))}
+            </div>
+          </section>
+          <section>
+            <h2>Item Listing</h2>
+            <form id="item-listing-form" onSubmit={this.onClickItemListingForm}>
+              <label htmlFor="item-name">Item Name</label>
+              <input type="text" id="item-name" name="item-name" required />
+
+              <label htmlFor="description">Description</label>
+              <textarea id="description" name="description" required></textarea>
+
+              <label htmlFor="condition">Condition</label>
+              <select id="condition" name="condition" required>
+                <option value="new">New</option>
+                <option value="used">Used</option>
+              </select>
+
+              <button type="submit">List Item</button>
+            </form>
+          </section>
+          <section>
+            <h2>Donation</h2>
+            <div id="donation-container">
+              {this.state.items.map((item) => (
+                <div className="donation-item" key={item.id}>
+                  <h3>{item.name}</h3>
+                  <p>{item.description}</p>
+                </div>
+              ))}
+            </div>
+          </section>
+          <section>
+            <h2>Item Search and Request</h2>
+            <form id="search-form" onSubmit={this.onClickSearchForm}>
+              <label htmlFor="search-query">Search</label>
+              <input type="text" id="search-query" name="search-query" required />
+
+              <button type="submit">Search</button>
+            </form>
+
+            <form id="request-form" onSubmit={this.onClickRequestForm}>
+              <label htmlFor="requested-item">Item</label>
+              <input type="text" id="requested-item" name="requested-item" required />
+
+              <button type="submit">Make Request</button>
+            </form>
+          </section>
+          <section>
+            <h2>Messaging and Notifications</h2>
+            {/* Messaging and notifications content */}
+          </section>
+        </main>
+      </div>
+    );
+  }
+}
+
+export default CommunityMarketplace;
